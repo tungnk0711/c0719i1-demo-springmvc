@@ -6,9 +6,26 @@
 </head>
 <body>
 <h1 class="title">Products List</h1>
+
+<h3 th:text="${5<8}"></h3>
+
+<th:block th:switch="${gender}">
+    <div th:case="'F'">
+        FEMALE
+    </div>
+    <div th:case="'M'">
+        MALE
+    </div>
+
+</th:block>
+
+<span th:if="${gender == 'F'}">Female</span>
+<span th:unless="${gender == 'F'}">Male</span>
+
 <div>
     <div th:each="product,iterStat : ${products}" th:class="${iterStat.odd}? 'odd'">
         <div class="product-item">
+            San pham so: <p th:text="${iterStat.index}"></p>
             <p th:text="${product.id}"></p>
             <p th:text="${product.name}"></p>
             <p th:text="${product.price}"></p>

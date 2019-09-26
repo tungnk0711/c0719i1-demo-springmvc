@@ -3,28 +3,34 @@ package com.codegym.repository.impl;
 import com.codegym.model.Product;
 import com.codegym.repository.ProductRepository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 public class ProductRepositoryImpl implements ProductRepository {
 
-    List<Product> productList = new ArrayList<>();
-    {
-        productList.add(new Product(1, "Samsung", 300.00,""));
-        productList.add(new Product(2, "Iphone", 400.00,""));
-        productList.add(new Product(3, "BlackBerry", 500.00,""));
-        productList.add(new Product(4, "Nokia", 600.00,""));
-        productList.add(new Product(5, "OPPO", 700.00,""));
-    }
+    @PersistenceContext
+    private EntityManager em;
 
 
     @Override
     public List<Product> findAll() {
-        return productList;
+
+        TypedQuery<Product> query = em.createQuery("select p from Product p", Product.class);
+        return query.getResultList();
+
     }
 
     @Override
     public void add(Product product) {
-        productList.add(product);
+        if(product.getId() != null ){
+            em.merge(product);
+        } else {
+            em.persist(product);
+        }
     }
 }

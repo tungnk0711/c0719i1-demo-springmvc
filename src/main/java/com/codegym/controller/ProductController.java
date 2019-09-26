@@ -40,6 +40,8 @@ public class ProductController {
 
         ModelAndView modelAndView = new ModelAndView("/product/list");
         modelAndView.addObject("products", productList);
+        modelAndView.addObject("gender","F");
+        modelAndView.addObject("message","Welcome CodeGym");
 
         return  modelAndView;
 
@@ -79,7 +81,7 @@ public class ProductController {
         // tham khảo: https://github.com/codegym-vn/spring-static-resources
 
         // tao doi tuong de luu vao db
-        Product productObject = new Product(productForm.getId(), productForm.getName(), productForm.getPrice(), fileName);
+        Product productObject = new Product(productForm.getName(), productForm.getPrice(), fileName);
 
         // luu vao db
         //productService.save(productObject);

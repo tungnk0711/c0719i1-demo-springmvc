@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ProductForm {
 
-    private int id;
+    private Long id;
     private String name;
     private Double price;
     private MultipartFile image;
@@ -12,18 +12,18 @@ public class ProductForm {
     public ProductForm() {
     }
 
-    public ProductForm(int id, String name, Double price, MultipartFile image) {
+    public ProductForm(Long id, String name, Double price, MultipartFile image) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.image = image;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

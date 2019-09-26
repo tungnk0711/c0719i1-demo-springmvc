@@ -10,10 +10,7 @@
 
 <form th:action="@{/product/save-product}" th:object="${productForm}" method="post" enctype="multipart/form-data">
     <table>
-        <tr>
-            <td>Id:</td>
-            <td><input type="text" th:field="*{id}"/></td>
-        </tr>
+
         <tr>
             <td>Name:</td>
             <td><input type="text" th:field="*{name}"/></td>

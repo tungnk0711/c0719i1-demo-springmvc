@@ -1,8 +1,15 @@
 package com.codegym.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "products")
 public class Product {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
+
     private String name;
     private Double price;
     private String image;
@@ -10,18 +17,24 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String name, Double price, String image) {
+    public Product(String name, Double price, String image) {
+        this.name = name;
+        this.price = price;
+        this.image = image;
+    }
+
+    public Product(Long id, String name, Double price, String image) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.image = image;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
