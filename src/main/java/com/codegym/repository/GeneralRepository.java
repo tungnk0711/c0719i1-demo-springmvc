@@ -7,4 +7,6 @@ public interface GeneralRepository<E> {
     List<E> findAll();
 
     void add(E e);
+
+    void addUseProcedure(E e);
 }

@@ -4,6 +4,18 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
+@NamedQuery(
+        name = "findAllProducts",
+        query = "SELECT p FROM Product p")
+@NamedStoredProcedureQuery(
+        name = "addProduct",
+        procedureName = "sp_insert_product",
+        parameters = {
+                @StoredProcedureParameter(name = "image", mode = ParameterMode.IN, type = String.class),
+                @StoredProcedureParameter(name = "name", mode = ParameterMode.IN, type = String.class),
+                @StoredProcedureParameter(name = "price", mode = ParameterMode.IN, type = Double.class)
+        }
+)
 public class Product {
 
     @Id

@@ -7,4 +7,6 @@ public interface GeneralService<E> {
 
     void add(E e);
 
+
+
 }

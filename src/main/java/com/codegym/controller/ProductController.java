@@ -23,13 +23,10 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/product")
-@PropertySource("classpath:general_config_app.properties")
 public class ProductController {
 
     //private ProductService productService = new ProductServiceImpl();
 
-    @Autowired
-    Environment env;
 
     @Autowired
     private ProductService productService;
@@ -66,29 +63,7 @@ public class ProductController {
             System.out.println("Result Error Occured" + result.getAllErrors());
         }
 
-        // lay ten file
-        MultipartFile multipartFile = productForm.getImage();
-        String fileName = multipartFile.getOriginalFilename();
-
-        String fileUpload = env.getProperty("file_upload").toString();
-
-        // luu file len server
-        try {
-            FileCopyUtils.copy(productForm.getImage().getBytes(), new File(fileUpload + fileName));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        // tham khảo: https://github.com/codegym-vn/spring-static-resources
-
-        // tao doi tuong de luu vao db
-        Product productObject = new Product(productForm.getName(), productForm.getPrice(), fileName);
-
-        // luu vao db
-        //productService.save(productObject);
-        productService.add(productObject);
-
-
-        //productService.add(product);
+        productService.addUseProcedure(productForm);
 
         ModelAndView modelAndView = new ModelAndView("/product/create");
         modelAndView.addObject("product", new Product());
